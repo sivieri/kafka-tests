@@ -1,0 +1,10 @@
+{
+    "namespace": "eu.sivieri.kafka.test.avro",
+    "type": "record",
+    "name": "Place",
+    "fields": [
+        {"name": "name", "type":  "string"},
+        {"name": "latitude", "type":  "double"},
+        {"name": "longitude", "type":  "double"}
+    ]
+}
