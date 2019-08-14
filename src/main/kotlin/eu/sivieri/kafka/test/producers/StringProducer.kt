@@ -1,26 +1,25 @@
-package eu.sivieri.kafka.test
+package eu.sivieri.kafka.test.producers
 
-import eu.sivieri.kafka.test.avro.Place
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
+import org.apache.kafka.common.serialization.StringSerializer
 import java.util.*
 
-class PlaceProducer {
+class StringProducer {
 
-    private val producer: KafkaProducer<String, Place>
+    private val producer: KafkaProducer<String, String>
 
     init {
         val properties = Properties()
         properties["bootstrap.servers"] = "localhost:9092"
-        properties["key.serializer"] = "org.apache.kafka.common.serialization.StringSerializer"
-        properties["value.serializer"] = "io.confluent.kafka.serializers.KafkaAvroSerializer"
+        properties["key.serializer"] = StringSerializer::class.java
+        properties["value.serializer"] = StringSerializer::class.java
         properties["compression.type"] = "snappy"
-        properties["schema.registry.url"] = "http://localhost:8081"
         producer = KafkaProducer(properties)
     }
 
-    fun publish(topic: String, place: Place) {
-        val record = ProducerRecord(topic, place.getName().toString(), place)
+    fun publish(topic: String, key: String, value: String) {
+        val record = ProducerRecord(topic, key, value)
         try {
             val result = producer.send(record).get()
             println(result)

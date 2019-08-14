@@ -1,4 +1,4 @@
-package eu.sivieri.kafka.test
+package eu.sivieri.kafka.test.producers
 
 import eu.sivieri.kafka.test.avro.Place
 
@@ -9,7 +9,7 @@ object Main {
         val stringProducer = StringProducer()
         stringProducer.publish("test", "First message", "Hello, world!")
         val placeProducer = PlaceProducer()
-        placeProducer.publish("test", Place("Test1", 45.0, 11.0))
+        placeProducer.publish("test2", Place("Test1", 45.0, 11.0))
     }
 
 }
